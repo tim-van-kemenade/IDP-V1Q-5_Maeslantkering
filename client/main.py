@@ -2,6 +2,7 @@ import threading
 import urllib.request as request
 import json
 import sqlite3
+import time
 
 station_number = ((8, 'Euro_platform'),
                   (16, 'Hoek_van_Holland'),
@@ -10,6 +11,23 @@ station_number = ((8, 'Euro_platform'),
                   (51, 'Zeeplatform_K13')
                   )
 key_tuple = ('windsnelheidMS', 'windrichtingGR', 'windrichting', 'windstotenMS')
+create_storm = 'CREATE TABLE IF NOT EXISTS storm (' \
+               'id INTEGER PRIMARY KEY AUTOINCREMENT,' \
+               'meet_station_id INTEGER,' \
+               'windsnelheidMS REAL,' \
+               'windrichtingGR INTEGER,' \
+               'windstotenMS REAL,' \
+               'epoch REAL' \
+               ');'.format(key_tuple[0], key_tuple[1], key_tuple[3])
+create_water = 'CREATE TABLE IF NOT EXISTS water_data (' \
+                   'id INTEGER PRIMARY KEY AUTOINCREMENT,' \
+                   'average_height REAL,' \
+                   'epoch REAL' \
+                   ');'
+insert_storm = 'INSERT INTO storm (windsnelheidMS, windrichtingGR, windstotenMS, epoch)' \
+               'VALUES({}{}{}{});'
+insert_water = 'INSERT INTO water_data (average_height, epoch)' \
+               'VALUES ({}{});'
 
 
 def request_api():
@@ -26,7 +44,7 @@ def request_api():
 def get_data():
     """Get necessary data from dictionary given by request_api().
 
-    :return: dictionary ordered by measure stations names as keys with requested data as value in a tuple
+    :return: done string to indicate that get_data() works
     """
     data = request_api()
     data_dict = {}
@@ -38,9 +56,42 @@ def get_data():
             value_list.append(value)
         data_dict[station[1]] = tuple(value_list)
     print(data_dict)
-    t = threading.Timer(5.0, get_data)
+    t = threading.Timer(600.0, get_data)
     t.start()
-    return data_dict
+    loop_query(data_dict)
+    return 'done'
+
+
+def loop_query(data_dict):
+    """Format query's from data given by the API and write it to the database.
+
+    :param data_dict: dictionary from the API passed on by get_data()
+    :return: done string to indicate that loop_query() works
+    """
+    epoch = time.time
+    for measure_station in station_number:
+        data_tuple = data_dict[measure_station[1]]
+        query = format_query('storm', data_tuple, epoch)
+        database_control('Weather.db', query)
+    return 'done'
+
+
+def format_query(table_name, data_tuple, epoch):
+    """Creates a query with the proper data included.
+
+    :param table_name: determines the name of the table
+    :param data_tuple: tuple used to pass on data accessed by index
+    :param epoch: time in seconds since epoch
+    :return: query to be used on the database
+    """
+    if table_name == 'storm':
+        query = insert_storm.format(data_tuple[0], data_tuple[1], data_tuple[3], epoch)
+    elif table_name == 'water_data':
+        query = insert_water.format(data_tuple[0], epoch)
+    else:
+        print('Error. You fucked up!')
+        query = ''
+    return query
 
 
 def database_control(database, query, fetch=False):
@@ -57,9 +108,10 @@ def database_control(database, query, fetch=False):
     connection.commit()
     if fetch is True:
         data = cursor.fetchall()
-        return data, 'okay'
+    else:
+        data = None
     connection.close()
-    return 'okay'
+    return data
 
 
 if __name__ == '__main__':
