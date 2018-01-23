@@ -25,9 +25,9 @@ create_water = 'CREATE TABLE IF NOT EXISTS water_data (' \
                    'epoch REAL' \
                    ');'
 insert_storm = 'INSERT INTO storm (windsnelheidMS, windrichtingGR, windstotenMS, epoch)' \
-               'VALUES({}{}{}{});'
+               'VALUES({}, {}, {}, {});'
 insert_water = 'INSERT INTO water_data (average_height, epoch)' \
-               'VALUES ({}{});'
+               'VALUES ({}, {});'
 
 
 def request_api():
@@ -48,11 +48,15 @@ def get_data():
     """
     data = request_api()
     data_dict = {}
+    global burst_list
+    burst_list = []
     for station in station_number:
         row = data['weerstation'][station[0]]
         value_list = []
         for key in key_tuple:
             value = row[key]
+            if key == 'windstotenMS':
+                burst_list.append(float(value))
             value_list.append(value)
         data_dict[station[1]] = tuple(value_list)
     print(data_dict)
@@ -68,7 +72,7 @@ def loop_query(data_dict):
     :param data_dict: dictionary from the API passed on by get_data()
     :return: done string to indicate that loop_query() works
     """
-    epoch = time.time
+    epoch = time.time()
     for measure_station in station_number:
         data_tuple = data_dict[measure_station[1]]
         query = format_query('storm', data_tuple, epoch)
@@ -114,5 +118,26 @@ def database_control(database, query, fetch=False):
     return data
 
 
+def storm_code(wind_bursts):
+    """Determines if the average wind burst is code orange or code yellow.
+
+    :param wind_bursts: tuple of recorded wind_bursts from measure stations selected in get_data()
+    :return: storm status, returns 'yellow' for code yellow and 'orange' for code orange, else 'None'
+    """
+    average_burst = sum(wind_bursts) / len(wind_bursts)
+    if average_burst > 27.777778:
+        storm = 'orange'
+    elif average_burst > 20.833333:
+        storm = 'yellow'
+    else:
+        storm = None
+    return storm
+
+
 if __name__ == '__main__':
+    database_control('Weather.db', create_water)
+    database_control('Weather.db', create_storm)
     get_data()
+    while True:
+        alert_code = storm_code(tuple(burst_list))
+        time.sleep(2)
