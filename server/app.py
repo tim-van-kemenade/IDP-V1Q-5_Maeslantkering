@@ -11,7 +11,7 @@ class App:
         self.app.run()
 
     def register_controller(self, controller):
-        controller.add_routes(controller, self)
+        controller.add_routes(self)
 
     def add_endpoint(self, endpoint=None, endpoint_name=None, handler=None):
         self.app.add_url_rule(endpoint, endpoint_name, EndpointAction(handler))
@@ -24,4 +24,4 @@ class EndpointAction(object):
         self.response = Response(status=200, headers={})
 
     def __call__(self, *args):
-        return self.action(self)
+        return self.action()

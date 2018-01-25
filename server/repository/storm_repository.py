@@ -1,10 +1,9 @@
-import sqlite3
 import time
 
 
 class StormRepository:
-    def __init__(self):
-        self.connection = sqlite3.connect('Weather.db', check_same_thread=False)
+    def __init__(self, connection):
+        self.connection = connection
         self.create_table()
 
     def create_table(self):
@@ -36,7 +35,7 @@ class StormRepository:
 
     def fetch_wind_burst(self):
         cursor = self.connection.cursor()
-        cursor.execute('SELECT id, windstotenMS FROM storm ORDER BY id DESC LIMIT 42')
+        cursor.execute('SELECT   id, windstotenMS FROM storm ORDER BY id DESC LIMIT 42')
         return cursor.fetchall()
 
     def fetch_wind_speed(self):
