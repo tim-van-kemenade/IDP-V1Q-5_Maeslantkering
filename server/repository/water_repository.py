@@ -5,8 +5,8 @@ import time
 class WaterRepository:
     connection: sqlite3.Connection
 
-    def __init__(self):
-        self.connection = sqlite3.connect('Weather.db', check_same_thread=False)
+    def __init__(self, connection):
+        self.connection = connection
         self.create_table()
 
     def create_table(self):
@@ -27,7 +27,7 @@ class WaterRepository:
                                 )
         self.connection.commit()
 
-    def fetch_data(self):
+    def fetch_all(self):
         cursor = self.connection.cursor()
         cursor.execute('SELECT * FROM water ORDER BY id DESC LIMIT 42')
         return cursor.fetchall()
