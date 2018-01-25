@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
+    <title>Proof-of-Concept Maeslantkering</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- toast CSS -->
+    <link href="../plugins/bower_components/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <!-- morris CSS -->
+    <link href="../plugins/bower_components/morrisjs/morris.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="css/animate.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="css/colors/blue-dark.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="cssload-speeding-wheel"></div>
+    </div>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top m-b-0">
+            <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></a>
+                <div class="top-left-part"><a class="logo" href="index.html"><b><img class="img-rounded" src="../plugins/images/Proof-Of-Concept.png" alt="home" width="36"/></b><span class="hidden-xs"><img src="../plugins/images/logo-text.png" alt="home" height="30"/></span></a></div>
+                <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
+                    <h3 class="box-title">Maeslantkering Proof-of-Concept</h3>
+                </ul>
+                <ul class="nav navbar-top-links navbar-right pull-right">
+                    <li>
+                        <a class="profile-pic" href="#"> <img src="../plugins/images/users/Tim_v_K.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Tim van Kemenade</b> </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-header -->
+            <!-- /.navbar-top-links -->
+            <!-- /.navbar-static-side -->
+        </nav>
+        <!-- Left navbar-header -->
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse slimscrollsidebar">
+                <ul class="nav" id="side-menu">
+                    <li style="padding: 10px 0 0;">
+                        <a href="index.html" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
+                    </li>
+                    <li>
+                        <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i><span class="hide-menu">Blank Page</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Left navbar-header end -->
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Dashboard</h4> </div>
+                        <ol class="breadcrumb">
+                            <li><a href="#">Dashboard</a></li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- row -->
+                <div class="row">
+                    <!--col -->
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="white-box">
+                            <div class="col-in row">
+                                <div class="col-md-6 col-sm-6 col-xs-6"> <i data-icon="E" class="linea-icon linea-basic"></i>
+                                    <h5 class="text-muted vb">MYNEW CLIENTS</h5> </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h3 class="counter text-right m-t-15 text-danger">23</h3> </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">40% Complete (success)</span> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <!--col -->
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="white-box">
+                            <div class="col-in row">
+                                <div class="col-md-6 col-sm-6 col-xs-6"> <i class="linea-icon linea-basic" data-icon="&#xe01b;"></i>
+                                    <h5 class="text-muted vb">NEW PROJECTS</h5> </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h3 class="counter text-right m-t-15 text-megna">169</h3> </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-megna" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">40% Complete (success)</span> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <!--col -->
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="white-box">
+                            <div class="col-in row">
+                                <div class="col-md-6 col-sm-6 col-xs-6"> <i class="linea-icon linea-basic" data-icon="&#xe00b;"></i>
+                                    <h5 class="text-muted vb">NEW INVOICES</h5> </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h3 class="counter text-right m-t-15 text-primary">157</h3> </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">40% Complete (success)</span> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+                <!--row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Water Height</h3>
+                            <ul class="list-inline text-right">
+                                <li>
+                                    <h5><i class="fa fa-circle m-r-5" style="color: #dadada;"></i>Current</h5>
+                                </li>
+                                <li>
+                                    <h5><i class="fa fa-circle m-r-5" style="color: #aec9cb;"></i>All Time</h5>
+                                </li>
+                            </ul>
+                            <div id="morris-area-chart2" style="height: 370px;"></div>
+                          <br />
+                            <h3 class="box-title">Wind Stats</h3>
+                            <ul class="list-inline text-right">
+                                <li>
+                                    <h5><i class="fa fa-circle m-r-5" style="color: #dadada;"></i>Speed</h5>
+                                </li>
+                                <li>
+                                    <h5><i class="fa fa-circle m-r-5" style="color: #aec9cb;"></i>Burst</h5>
+                                </li>
+                            </ul>
+                            <div class="" id="sales-chart" style="height: 355px;"></div></div>
+                    </div>
+                </div>
+                <!--row -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Maeslantkering</h3>
+                            <img class="img-responsive" src="https://www.portofrotterdam.com/sites/default/files/styles/por_is_content_image/public/maeslantkering_0.jpg?itok=DRSLPx3S" alt="Maeslantkering">
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-6 col-sm-12">
+                        <div class="white-box">
+                          <h3 class="box-title">Our mission</h3>
+                          <p>The Maeslantkering protects the harbor of Rotterdam against the North Sea. When the sea level rises the harbor is at danger. If the water gets too high, the Maeslantkering must close. However, the failure probability is too high. To reduce the chance of failure without making the Maeslantkering more unsafe, a Proof-of-Concept must come. Our team is tasked with this project. Our mission is to create a working scale replica that mimics the functionality of the Maeslantkering.</p>
+                          <p class="text-right">Build a Proof-of-Concept for the Maeslantkering and present the demo in 3 weeks.</p>
+                          <footer class="blockquote-reverse">Brian van der Bijl as <cite title="Source Title">Teacher Hogeschool Utrecht</cite></footer>
+                          <h3 class="box-title">Team creation</h3>
+                          <p>The team was drafted by the teacher Marco van den Boogaard on 22 November 2017. Five individuals were chosen based on their specialization. The team then made agreements and a project proposal together.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Team member specialization</h3>
+                            <div class="message-center">
+                                <a href="#">
+                                    <div class="user-img"> <img src="../plugins/images/users/Anton_W.png" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
+                                    <div class="mail-contnet">
+                                        <h5>Anton Wigman</h5> <span class="mail-desc">Specialized in Software Information Engineering.</span></div>
+                                </a>
+                                <a href="#">
+                                    <div class="user-img"> <img src="../plugins/images/users/Christy_B.png" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
+                                    <div class="mail-contnet">
+                                        <h5>Christy Brouwer</h5> <span class="mail-desc">Specialized in Technical Informatics.</span></div>
+                                </a>
+                                <a href="#">
+                                    <div class="user-img"> <img src="../plugins/images/users/Dennis_S.png" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span> </div>
+                                    <div class="mail-contnet">
+                                        <h5>Dennis Snijder</h5> <span class="mail-desc">Specialized in Business IT & Management.</span></div>
+                                </a>
+                                <a href="#">
+                                    <div class="user-img"> <img src="../plugins/images/users/Tim_v_d_M.png" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
+                                    <div class="mail-contnet">
+                                        <h5>Tim van der Meijs</h5> <span class="mail-desc">Specialized in System Network Engineering.</span></div>
+                                </a>
+                                <a href="#" class="b-none">
+                                    <div class="user-img"> <img src="../plugins/images/users/Tim_v_K.jpg" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
+                                    <div class="mail-contnet">
+                                        <h5>Tim van Kemenade</h5> <span class="mail-desc">Specialized Software Information Engineering.</span></div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="white-box">
+            <footer class="footer text-center"><p>if footer is not mine: <br>steal_footer()</p><p>2018 &copy; IDP Group 5</p></footer>
+          </div>
+        </div>
+      </div>
+        </div>
+        <!-- /#page-wrapper -->
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="js/waves.js"></script>
+    <!--Counter js -->
+    <script src="../plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
+    <script src="../plugins/bower_components/counterup/jquery.counterup.min.js"></script>
+    <!--Morris JavaScript -->
+    <script src="../plugins/bower_components/raphael/raphael-min.js"></script>
+    <script src="../plugins/bower_components/morrisjs/morris.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="js/custom.min.js"></script>
+    <script src="js/dashboard1.js"></script>
+    <script src="js/dashboard2.js"></script>
+    <script src="../plugins/bower_components/toast-master/js/jquery.toast.js"></script>
+</body>
+
+</html>
