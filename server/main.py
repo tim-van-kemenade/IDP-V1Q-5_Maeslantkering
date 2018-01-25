@@ -1,17 +1,9 @@
-from flask import Flask, request, json, Response
+from server.app import App
+from server.controllers.rest_controller import RestController
 
-app = Flask(__name__)
+app = App()
 
-
-#########################################################
-#                    Controllers                       #
-#########################################################
-
-@app.route("/alive")
-def alive():
-    return "OK"
-
+app.register_controller(RestController)
 
 if __name__ == '__main__':
-    port = int(9001)
-    app.run(host='', port=port)
+    app.run()
