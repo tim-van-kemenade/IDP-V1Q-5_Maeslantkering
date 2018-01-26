@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <title>Maeslantkering Proof-of-Concept</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}">
+    <!-- Color stylesheet from Wrap Pixel's Pixeladmin Lite template -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/color/blue-dark.css') }}">
+    <!-- Style stylesheet from Wrap Pixel's Pixeladmin Lite template -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Sidebar stylesheet from Wrap Pixel's Pixeladmin Lite template -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar-nav.min.css') }}">
+    <!--Morris css stylesheet for the graphs-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/morris/morris.css') }}">
+    <!--Font Awesome 4 stylesheet as replacement for icons in the original template to decrease amount of files needed-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div id="wrapper">
+      <nav class="navbar navbar-default navbar-static-top m-b-0">
+        <div class="navbar-header">
+          <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse">
+            <i class="fa fa-bars"></i>
+          </a>
+          <div class="top-left-part">
+            <a class="logo" href="#">
+              <b>
+                <img class="img-rounded" src="{{ url_for('static', filename='images/proof-of-concept.png') }}" alt="home" width="36"/>
+              </b>
+              <span class="hidden-xs">
+                <img src="{{ url_for('static', filename='images/logo-text.png') }}" alt="home" height="28"/>
+              </span>
+            </a>
+          </div>
+          <div class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
+            <h2 class="box-title" style="color: #FFFFFF">Maeslantkering Proof-of-Concept</h2>
+          </div>
+          <div class="nav navbar-top-links navbar-right pull-right">
+            <a class="profile-pic" href="#">
+              <img src="{{ url_for('static', filename='images/users/Tim_v_K.jpg') }}" alt="user-img" width="36" class="img-circle">
+              <b class="hidden-xs" style="color: #FFFFFF;">Tim van Kemenade</b>
+            </a>
+          </div>
+        </div>
+      </nav>
+      <div class="navbar-default sidebar" role="navigation" style="color: #6cb0ba !important;">
+        <div class="sidebar-nav navbar-collapse">
+          <ul class="nav" id="side-menu">
+            <li style="padding: 10px 0 0;">
+              <a href="/" class="waves-effect" style="color: #85b4d0;">
+                <i class="fa fa-dashboard fa-fw" aria-hidden="true"></i>
+                <span class="hide-menu" style="color: #000000; font-weight: 400; letter-spacing: .1em;">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/about_project" class="waves-effect" style="color: #85b4d0;">
+                <i class="fa fa-columns fa-fw" aria-hidden="true"></i>
+                <span class="hide-menu" style="color: #000000; font-weight: 400; letter-spacing: .1em;">About our project</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="page-wrapper">
+        <div class="container-fluid">
+          <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+              <h4 class="page-title">Dashboard</h4> </div>
+            <ol class="breadcrumb">
+              <li><a href="#">Dashboard</a></li>
+            </ol>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="white-box">
+              <h3 class="box-title">Water Height in m</h3>
+              <ul class="list-inline text-right">
+                <li>
+                  <h5><i class="fa fa-circle m-r-5" style="color: #2153ff;"></i>Current height</h5>
+                </li>
+              </ul>
+              <div id="morris-area-water" style="height: 370px;">
+                <!--This is where the first graph is called-->
+              </div>
+              <br /><br />
+              <h3 class="box-title">Wind Stats in m/s</h3>
+              <ul class="list-inline text-right">
+                <li>
+                  <h5><i class="fa fa-circle m-r-5" style="color: #24d2b5;"></i>Speed</h5>
+                </li>
+                <li>
+                  <h5><i class="fa fa-circle m-r-5" style="color: #cc1111;"></i>Burst</h5>
+                </li>
+              </ul>
+              <div class="" id="morris-area-wind" style="height: 355px;">
+                <!--This is where the second graph is called-->
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="white-box">
+                <h3 class="box-title">Maeslantkering</h3>
+                <img class="img-responsive" src="https://www.portofrotterdam.com/sites/default/files/styles/por_is_content_image/public/maeslantkering_0.jpg?itok=DRSLPx3S" alt="Maeslantkering">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="white-box">
+                <h3 class="box-title">Our mission</h3>
+                <p>The Maeslantkering protects the harbor of Rotterdam against the North Sea. When the sea level rises the harbor is at danger. If the water gets too high, the Maeslantkering must close. However, the failure probability is too high. To reduce the chance of failure without making the Maeslantkering more unsafe, a Proof-of-Concept must come. Our team is tasked with this project. Our mission is to create a working scale replica that mimics the functionality of the Maeslantkering.</p>
+                <p class="text-right">Build a Proof-of-Concept for the Maeslantkering and present the demo in 3 weeks.</p>
+                <footer class="blockquote-reverse">Brian van der Bijl as <cite title="Source Title">Teacher Hogeschool Utrecht</cite></footer>
+                <h3 class="box-title">Team creation</h3>
+                <p>The team was drafted by the teacher Marco van den Boogaard on 22 November 2017. Five individuals were chosen based on their specialization. The team then made agreements and a project proposal together.</p>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="white-box">
+                <h3 class="box-title">Team member specialization</h3>
+                <div class="message-center">
+                  <a href="#">
+                    <div class="user-img">
+                      <img src="{{ url_for('static', filename='images/users/Anton_W.png') }}" alt="user" class="img-circle">
+                      <span class="profile-status online pull-right"></span>
+                    </div>
+                    <div class="mail-contnet">
+                      <h5>Anton Wigman</h5>
+                      <span class="mail-desc">Specialized in Software Information Engineering.</span>
+                    </div>
+                  </a>
+                  <a href="#">
+                    <div class="user-img">
+                      <img src="{{ url_for('static', filename='images/users/Christy_B.png') }}" alt="user" class="img-circle">
+                      <span class="profile-status busy pull-right"></span>
+                    </div>
+                    <div class="mail-contnet">
+                      <h5>Christy Brouwer</h5>
+                      <span class="mail-desc">Specialized in Technical Informatics.</span>
+                    </div>
+                  </a>
+                  <a href="#">
+                    <div class="user-img">
+                      <img src="{{ url_for('static', filename='images/users/Dennis_S.png') }}" alt="user" class="img-circle">
+                      <span class="profile-status away pull-right"></span>
+                    </div>
+                    <div class="mail-contnet">
+                      <h5>Dennis Snijder</h5>
+                      <span class="mail-desc">Specialized in Business IT & Management.</span>
+                    </div>
+                  </a>
+                  <a href="#">
+                    <div class="user-img">
+                      <img src="{{ url_for('static', filename='images/users/Tim_v_d_M.png') }}" alt="user" class="img-circle">
+                      <span class="profile-status online pull-right"></span>
+                    </div>
+                    <div class="mail-contnet">
+                      <h5>Tim van der Meijs</h5>
+                      <span class="mail-desc">Specialized in System Network Engineering.</span>
+                    </div>
+                  </a>
+                  <a href="#" class="b-none">
+                    <div class="user-img">
+                      <img src="{{ url_for('static', filename='images/users/Tim_v_K.jpg') }}" alt="user" class="img-circle">
+                      <span class="profile-status offline pull-right"></span>
+                    </div>
+                    <div class="mail-contnet">
+                      <h5>Tim van Kemenade</h5>
+                      <span class="mail-desc">Specialized Software Information Engineering.</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="white-box">
+            <footer class="footer text-center"><p>if footer is not mine: <br>steal_footer()</p><p>2018 &copy; IDP Group 5</p></footer>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <!-- /#page-wrapper -->
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="{{ url_for('static', filename='js/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ url_for('static', filename='js/bootstrap/bootstrap.min.js') }}"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="{{ url_for('static', filename='js/sidebar-nav/sidebar-nav.min.js') }}"></script>
+    <!--Morris JavaScript -->
+    <script src="{{ url_for('static', filename='js/raphael/raphael-min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/morris/morris.js') }}"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="{{ url_for('static', filename='js/custom.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/graphs.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/toast/jquery.toast.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <title>Maeslantkering Proof-of-Concept</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}">
+    <!-- Color stylesheet from Wrap Pixel's Pixeladmin Lite template -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/color/blue-dark.css') }}">
+    <!-- Style stylesheet from Wrap Pixel's Pixeladmin Lite template -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Sidebar stylesheet from Wrap Pixel's Pixeladmin Lite template -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar-nav.min.css') }}">
+    <!--Morris css stylesheet for the graphs-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/morris/morris.css') }}">
+    <!--Font Awesome 4 stylesheet as replacement for icons in the original template to decrease amount of files needed-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div id="wrapper">
+      <nav class="navbar navbar-default navbar-static-top m-b-0">
+        <div class="navbar-header">
+          <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse">
+            <i class="fa fa-bars"></i>
+          </a>
+          <div class="top-left-part">
+            <a class="logo" href="#">
+              <b>
+                <img class="img-rounded" src="{{ url_for('static', filename='images/proof-of-concept.png') }}" alt="home" width="36"/>
+              </b>
+              <span class="hidden-xs">
+                <img src="{{ url_for('static', filename='images/logo-text.png') }}" alt="home" height="28"/>
+              </span>
+            </a>
+          </div>
+          <div class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
+            <h2 class="box-title" style="color: #FFFFFF">Maeslantkering Proof-of-Concept</h2>
+          </div>
+          <div class="nav navbar-top-links navbar-right pull-right">
+            <a class="profile-pic" href="#">
+              <img src="{{ url_for('static', filename='images/users/Tim_v_K.jpg') }}" alt="user-img" width="36" class="img-circle">
+              <b class="hidden-xs" style="color: #FFFFFF;">Tim van Kemenade</b>
+            </a>
+          </div>
+        </div>
+      </nav>
+      <div class="navbar-default sidebar" role="navigation" style="color: #6cb0ba !important;">
+        <div class="sidebar-nav navbar-collapse">
+          <ul class="nav" id="side-menu">
+            <li style="padding: 10px 0 0;">
+              <a href="/" class="waves-effect" style="color: #85b4d0;">
+                <i class="fa fa-dashboard fa-fw" aria-hidden="true"></i>
+                <span class="hide-menu" style="color: #000000; font-weight: 400; letter-spacing: .1em;">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/about_project" class="waves-effect active" style="color: #85b4d0;">
+                <i class="fa fa-columns fa-fw" aria-hidden="true"></i>
+                <span class="hide-menu" style="color: #000000; font-weight: 400; letter-spacing: .1em;">About our project</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="page-wrapper">
+        <div class="container-fluid">
+          <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+              <h4 class="page-title">About our project</h4> </div>
+            <ol class="breadcrumb">
+              <li><a href="#">Dashboard</a></li>
+              <li class="active" style="color: #2a3035">About our project</li>
+            </ol>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="white-box">
+              <h3 class="box-title">Our goal</h3>
+              <p>Make a working Proof-of-Concept of the Maeslantkering within the three given project weeks.</p>
+              <h3 class="box-title">The Maeslantkering</h3>
+              <p>The Maeslantkering consists of two retaining walls that are closed during storms. The barrier has two walls of 22 meters high and 210 meters long and consist of 15 compartments with space for the pumps, valves and a corridor for maintenance personnel. When the barrier is closed, the barrier passes over rails to its position. The ball joint around which the barrier rotates to get into its position can turn in 3 directions. This allows the hinge to follow the movements of the walls and keep these walls in place. In order to guarantee a good closure, a threshold of concrete blocks has been placed at the bottom of the river, in total 64 blocks with a weight of 630 tons per block. The goal of the Maeslantkering is to leave the sailing route open as long as possible. If the barrier has to be closed, the closure will be communicated 4 to 8 hours in advance with the ships that the navigation route will close. The barrier is then closed in 2.5 hours. The barrier does not open until the storm is over and the water level is normal again.</p>
+            </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="white-box">
+                <img class="img-responsive" src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Maeslantkering_northern_half_2.jpg" alt="Maeslantkering">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="white-box">
+                <h3 class="box-title">Our Proof-of-Concept</h3>
+                <p>The Proof-of-Concept that we are going to make is powered by one servo and receives up-to-date data via two float sensors. In the Proof-of-Concept, the servo establishes the close and open functionality of the Maeslantkering. The float sensors are used to determine whether the barrier should actually be closed or reopened. This is done by placing the float sensors at separate heights. One height that takes into account the predictive functionality of the Maeslantkering, namely when there is a storm. The first sensor is therefore also lower. The second sensor is at the normal closing height to simulate closure under normal conditions.</p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="white-box">
+                <img class="img-rounded" src="http://www.headsuphobby.com/assets/images/b-595.jpg" alt="servo" style="padding-right: 100px">
+                <img class="img-rounded" src="https://ae01.alicdn.com/kf/HTB1KrQkIpXXXXXIaXXXq6xXFXXXY/Tank-Pool-Water-Level-Float-Switch-Right-Angle-Liquid-Level-Sensor-Liquid-Plastic-Float-Ball-Switcher.jpg" alt="servo">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="white-box">
+                <h3 class="box-title">Determining Procedures</h3>
+                <p>First off we had to determine all procedures. In order to design the procedures, Dennis Snijder from Business IT & Management had to find the authorities that are involved in the Maeslantkering. After this was done, the procedures were written out as models in BPMN 2.0. This makes it clear what the product must be able to do at the end of the project and the software information engineering can program the basis.</p>
+                <h3 class="box-title">State Pattern Design</h3>
+                <p>Now the programming could be started. The program uses the State Pattern Design. This was done because each status of the Proof-of-Concept, as with the Maeslantkering, requires separate measures. With the State Pattern Design, a set of functions can be executed based on the status until the status changes and the next batch of functions gets executed. This happens in an infinite loop until the program is terminated. The State Pattern Design was built in the following way. First we build the main class in which the state is changed based on the return given by the previous executed state (The return of the state can return a pointer to itself and so successfully restarting itself). States are changed based on a dictionary created in the main class. This dictionary contains the state classes as values with the state classes return values as keys. The return values of the states are used as keys to constantly change the state. The states all contain an interface state in which the abstract method is implemented. This abstract method ensure us that there is a handle function within the state. This handle function is eventually used to execute the states functionality and return the next state in the form of a string referring to a dictionary key.</p>
+                <h3 class="box-title">Website</h3>
+                <p>Then the websites had to be built. The websites comes on the client, in the form of a real website with interface and for sending json data to the server, and on the server, only to send json data to the client. The look of the client website is made with a free website design of Wrap Pixel which can be found at <a href="https://wrappixel.com/templates/pixel-admin-lite/">this website</a>. The design from Wrap Pixel has been completely rebuilt only reusing some of their CSS and JavaScript files, the HTML structure has been used as well, but completely rebuilt to decrease the amount of files needed to run the website properly. This design has been adapted to meet the requirements of the project. The only other changed file is the JavaScript file in which the graphs were created, it has been rebuilt to contain two graphs with dynamic data instead of static data. Both the State Pattern Design and the Website where implemented by Anton Wigman and Tim van Kemenade from the Software Information Engineering team.</p>
+                <h3 class="box-title">Hardware</h3>
+                <p>The hardware part of the project has mostly been done by Christy Brouwer from Technical Informatics, only the implementation into the class design has been done by the Software Information Engineering team. For the hardware part the servo and sensors needed to work in co-operation with the Raspberry Pi. To do this the hardware was attached to the Raspberry Pi with jumper wires on the right GPIO pin. The equipment was thoroughly tested to make sure the correct inputs were received and outputs sent. Then the code was made more flexible to better suit the program. After this had been done the code was implemented into the class design.</p>
+                <h3 class="box-title">System</h3>
+                <p>The network was created by Tim van der Meijs from System Network Engineering. For the network, the Raspberry Pi, used as a server, and the two Raspberry Pi's, used as clients, had to be connected to each other via a switch. The goal was to be able to exchange data between the clients and server. This was done with flask by hosting json that could be retrieved by the server and clients.</p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="white-box">
+                <h3 class="box-title">PowerPoint about our project</h3>
+                <p>Please note that the presentation below is written in Dutch.</p>
+                <iframe src="">Project PowerPoint in Dutch</iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#page-wrapper -->
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="{{ url_for('static', filename='js/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ url_for('static', filename='js/bootstrap/bootstrap.min.js') }}"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="{{ url_for('static', filename='js/sidebar-nav/sidebar-nav.min.js') }}"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="{{ url_for('static', filename='js/custom.min.js') }}"></script>
+  </body>
+</html>
