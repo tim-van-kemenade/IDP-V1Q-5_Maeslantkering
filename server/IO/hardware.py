@@ -8,7 +8,7 @@ class Hardware(object):
     def __init__(self):
         self.motor = Motor(forward=11, backward=50, pwm=False)
 
-    def handle_input(self):
+    def handle_input(self, input):
         # todo: find out how to do this @ gpiozero
         return 0
 

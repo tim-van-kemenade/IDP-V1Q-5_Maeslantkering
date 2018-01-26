@@ -44,8 +44,11 @@ class MainClass:
             'closing': ClosingState(self, self.hardware).handle()
         }
 
-        state_thread = threading.Thread(self.state_change())
+        self.flask_app.run()
+
+        state_thread = threading.Thread(target=self.state_change)
         state_thread.start()
+
 
     def register_controllers(self):
         self.flask_app.register_controller(RestController(self.water_repository, self.storm_repository))
