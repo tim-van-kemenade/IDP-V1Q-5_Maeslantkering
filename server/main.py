@@ -17,15 +17,8 @@ from server.repository.storm_repository import StormRepository
 class MainClass:
     storm = None
 
-    state: str = 'open'
-    states: dict = {}
-
-    hardware: Hardware
-    flask_app: App
-
-    connection: sqlite3.Connection
-    water_repository: WaterRepository
-    storm_repository: StormRepository
+    state = 'open'
+    states = {}
 
     def __init__(self):
         self.connection = DatabaseFactory().create_connection()
@@ -48,7 +41,6 @@ class MainClass:
 
         state_thread = threading.Thread(target=self.state_change)
         state_thread.start()
-
 
     def register_controllers(self):
         self.flask_app.register_controller(RestController(self.water_repository, self.storm_repository))
