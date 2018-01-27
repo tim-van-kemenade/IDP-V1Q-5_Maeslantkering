@@ -1,10 +1,7 @@
-import sqlite3
 import time
 
 
 class WaterRepository:
-    connection: sqlite3.Connection
-
     def __init__(self, connection):
         self.connection = connection
         self.create_table()

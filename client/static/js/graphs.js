@@ -44,33 +44,33 @@ var graph_wind = Morris.Area({
     element: 'morris-area-wind',
     data: [{
             period: 'Past hour',
-            Wind_1: 50,
-            Wind_2: 80
+            Wind_1: 0,
+            Wind_2: 0
         }, {
             period: '2 hours ago',
-            Wind_1: 130,
-            Wind_2: 100
+            Wind_1: 0,
+            Wind_2: 0
         }, {
             period: '3 hours ago',
-            Wind_1: 80,
-            Wind_2: 60
+            Wind_1: 0,
+            Wind_2: 0
         }, {
             period: '4 hours ago',
-            Wind_1: 70,
-            Wind_2: 200
+            Wind_1: 0,
+            Wind_2: 0
         }, {
             period: '5 hours ago',
-            Wind_1: 180,
-            Wind_2: 150
+            Wind_1: 0,
+            Wind_2: 0
         }, {
             period: '6 hours ago',
-            Wind_1: 105,
-            Wind_2: 100
+            Wind_1: 0,
+            Wind_2: 0
         },
         {
             period: '7 hours ago',
-            Wind_1: 250,
-            Wind_2: 150
+            Wind_1: 0,
+            Wind_2: 0
         }
     ],
     xkey: 'period',
@@ -90,8 +90,19 @@ var graph_wind = Morris.Area({
     resize: true
 
 });
+// TODO: if water graph is not removed from the project, create function to set it's data like the function below does for wind_graph
+function LoadGraphData() {
+    // load json data to graphs
+    console.log("now updating data");
+    $.get("/wind_json", null,  // TODO: check if /wind_json is the path where the actual json is located
+        function (data, textstatus, jqXHR) {
+            console.log('callback returned result of type ' + typeof(data) );
+            console.log('text message: ' + textstatus);
+            graph_wind.setData(data);
+        })
+}
 
-$(".counter").counterUp({
-    delay: 100,
-    time: 1200
+$( document ).ready(function() {
+    console.log( "now starting periodic data retrieval" );
+    self.setInterval(LoadGraphData, 600000); // TODO: adjust to 30 min or 1 hour if necessary
 });
