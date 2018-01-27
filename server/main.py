@@ -1,5 +1,4 @@
 import threading
-import sqlite3
 import time
 
 from server.app import App
@@ -18,6 +17,13 @@ from server.repository.storm_repository import StormRepository
 
 class MainClass:
     storm = None
+    data_list = [0, 0, 0]  # Used in child class
+    station_number = ((8, 'Euro_platform'),
+                      (16, 'Hoek_van_Holland'),
+                      (33, 'Rotterdam_Geulhaven'),
+                      (51, 'Zeeplatform_K13')
+                      )  # Used in child class
+    key_tuple = ('windsnelheidMS', 'windrichtingGR', 'windstotenMS')  # Used in child class
 
     state = 'open'
     states = {}
@@ -39,7 +45,8 @@ class MainClass:
             'closing': ClosingState(self, self.hardware).handle()
         }
 
-        self.flask_app.run()
+        flask_thread = threading.Thread(target=self.flask_app.run)
+        flask_thread.start()
 
         state_thread = threading.Thread(target=self.state_change)
         state_thread.start()
@@ -56,7 +63,8 @@ class MainClass:
 
     def data_save(self):
         while True:
-            MainClass.data_list = RequestApi(self)
+            api_data = RequestApi(self)
+            MainClass.data_list = api_data.get_data()
             storm_write = StormWrite(MainClass.data_list)
             storm_write.storm_table_write()
             MainClass.storm = storm_write.storm_code()
