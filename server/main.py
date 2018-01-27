@@ -1,6 +1,7 @@
 import threading
-
 import sqlite3
+import time
+
 from server.app import App
 from server.controllers.rest_controller import RestController
 from server.IO.hardware import Hardware
@@ -8,7 +9,8 @@ from server.states.open_state import OpenState
 from server.states.closed_state import ClosedState
 from server.states.opening_state import OpeningState
 from server.states.closing_state import ClosingState
-
+from server.storm.request_api import RequestApi
+from server.storm.storm_write import StormWrite
 from server.factory.database_factory import DatabaseFactory
 from server.repository.water_repository import WaterRepository
 from server.repository.storm_repository import StormRepository
@@ -42,12 +44,23 @@ class MainClass:
         state_thread = threading.Thread(target=self.state_change)
         state_thread.start()
 
+        api_thread = threading.Thread(self.data_save())
+        api_thread.start()
+
     def register_controllers(self):
         self.flask_app.register_controller(RestController(self.water_repository, self.storm_repository))
 
     def state_change(self):
         while True:
             self.state = self.states[self.state]
+
+    def data_save(self):
+        while True:
+            MainClass.data_list = RequestApi(self)
+            storm_write = StormWrite(MainClass.data_list)
+            storm_write.storm_table_write()
+            MainClass.storm = storm_write.storm_code()
+            time.sleep(600)
 
 
 if __name__ == '__main__':
