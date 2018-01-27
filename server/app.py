@@ -8,7 +8,7 @@ class App:
         self.app = Flask(__name__)
 
     def run(self):
-        self.app.run()
+        self.app.run(port=1337)
 
     def register_controller(self, controller):
         controller.add_routes(self)
