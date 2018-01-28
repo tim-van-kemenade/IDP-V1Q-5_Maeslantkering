@@ -1,4 +1,5 @@
 from flask import Flask, Response
+from flask_cors import CORS
 
 
 class App:
@@ -6,6 +7,7 @@ class App:
 
     def __init__(self):
         self.app = Flask(__name__)
+        CORS(self.app)
 
     def run(self):
         self.app.run(port=1337)
@@ -18,7 +20,6 @@ class App:
 
 
 class EndpointAction(object):
-
     def __init__(self, action):
         self.action = action
         self.response = Response(status=200, headers={})
