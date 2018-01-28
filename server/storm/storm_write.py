@@ -8,9 +8,9 @@ class StormWrite:
 
     def storm_code(self):
         if self.data[2] > 27.777778:
-            storm = 'orange'
+            storm = True
         elif self.data[2] > 20.833333:
-            storm = 'yellow'
+            storm = False
         else:
             storm = None
         return storm
