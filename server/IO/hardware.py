@@ -1,21 +1,21 @@
-from gpiozero import Motor
+from gpiozero import Servo
 
 
 class Hardware(object):
-    servo = 11
+    servo_pin = 11
     sensor_1 = 13
 
     def __init__(self):
-        self.motor = Motor(forward=11, backward=50, pwm=False)
+        self.servo = Servo(self.servo_pin)
 
     def handle_input(self, input):
         # todo: find out how to do this @ gpiozero
         return 0
 
     def open_gate(self) -> bool:
-        self.motor.forward()
+        self.servo.min()
         return False
 
     def close_gate(self) -> bool:
-        self.motor.backward()
+        self.servo.max()
         return True
