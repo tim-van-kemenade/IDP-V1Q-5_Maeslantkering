@@ -104,5 +104,6 @@ function LoadGraphData() {
 
 $( document ).ready(function() {
     console.log( "now starting periodic data retrieval" );
+    LoadGraphData();  // Ensure graph is properly loaded right away
     self.setInterval(LoadGraphData, 600000); // TODO: adjust to 30 min or 1 hour if necessary
 });
