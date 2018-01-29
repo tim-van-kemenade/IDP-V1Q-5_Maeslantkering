@@ -15,8 +15,10 @@ class WaterRepository:
             ');'
         )
         self.connection.commit()
+        print('Water table exists')
 
     def add_data(self, water_height):
+        print(water_height, '- Add data water repository')
         self.connection.execute('INSERT INTO water (average_height, epoch)'
                                 'VALUES({}, {});'.format(water_height,
                                                          time.time()
@@ -27,4 +29,5 @@ class WaterRepository:
     def fetch_all(self):
         cursor = self.connection.cursor()
         cursor.execute('SELECT * FROM water ORDER BY id DESC LIMIT 42')
+        print('Fetched last 42 water rows - Storm table')
         return cursor.fetchall()

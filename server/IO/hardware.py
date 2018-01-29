@@ -1,21 +1,22 @@
-from gpiozero import Servo
+from gpiozero import Servo, MotionSensor
 from gpiozero.pins import mock
 import platform
 
 
 class Hardware(object):
-    servo_pin = 11
-    sensor_1 = 13
+    servo_pin = 17
 
     def __init__(self):
-        self.servo = Servo(self.servo_pin, pin_factory=mock.MockFactory(pin_class=mock.MockPWMPin))
-
         if platform.system() == 'Linux':
             self.servo = Servo(self.servo_pin)
+        else:
+            self.servo = Servo(self.servo_pin, pin_factory=mock.MockFactory(pin_class=mock.MockPWMPin))
 
-    def handle_input(self, input):
+    def float_sensor(self, pin):
         # todo: find out how to do this @ gpiozero
-        return 0
+        sensor = MotionSensor(pin)
+        feedback = sensor.wait_for_inactive()
+        return feedback
 
     def open_gate(self) -> bool:
         self.servo.min()

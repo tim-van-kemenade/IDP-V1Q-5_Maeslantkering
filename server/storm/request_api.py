@@ -11,6 +11,7 @@ class RequestApi:
         api_url = 'https://api.buienradar.nl/data/public/1.1/jsonfeed'
         with request.urlopen(api_url) as url:
             data = json.loads(url.read().decode())
+        print('Request sent to API')
         return data['buienradarnl']['weergegevens']['actueel_weer']['weerstations']
 
     def get_data(self):
@@ -32,4 +33,5 @@ class RequestApi:
         average_speed = sum(speed_list)
         average_direction = sum(direction_list)
         average_burst = sum(burst_list)
+        print('Got data from API')
         return [average_speed, average_direction, average_burst]

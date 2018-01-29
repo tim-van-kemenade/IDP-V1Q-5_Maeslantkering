@@ -3,20 +3,21 @@ from server.repository.storm_repository import StormRepository
 
 
 class StormWrite:
-    def __init__(self, data_list):
+    def __init__(self, connection, data_list):
+        self.connection = connection
         self.data = data_list
 
     def storm_code(self):
         if self.data[2] > 27.777778:
-            storm = True
+            storm = True  # Code Orange
         elif self.data[2] > 20.833333:
-            storm = False
+            storm = False  # Code Yellow
         else:
-            storm = None
+            storm = None  # No storm code exists for this
+        print('Checked for a storm')
         return storm
 
     def storm_table_write(self):
-        database = DatabaseFactory()  # TODO: properly create an instance for DatabaseFactory
-        connection = database.create_connection()  # TODO: if above is completed check if sqlite functions get executed
-        repository = StormRepository(connection)
+        repository = StormRepository(self.connection)
+        print(self.data, '- Storm table write')
         repository.add_data(self.data[0], self.data[1], self.data[2])

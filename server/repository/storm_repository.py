@@ -17,8 +17,10 @@ class StormRepository:
             ');'
         )
         self.connection.commit()
+        print('Storm table exists')
 
     def add_data(self, wind_speed, wind_direction, wind_burst):
+        print(wind_speed, wind_direction, wind_burst, '- Add data storm repository')
         self.connection.execute('INSERT INTO storm (windsnelheidMS, windrichtingGR, windstotenMS, epoch)'
                                 'VALUES({}, {}, {}, {});'.format(wind_speed,
                                                                  wind_direction,
@@ -31,19 +33,29 @@ class StormRepository:
     def fetch_all(self):
         cursor = self.connection.cursor()
         cursor.execute('SELECT * FROM storm ORDER BY id DESC')
+        print('Fetched all storm data - Storm table')
         return cursor.fetchall()
 
     def fetch_wind_burst(self):
         cursor = self.connection.cursor()
-        cursor.execute('SELECT   id, windstotenMS FROM storm ORDER BY id DESC LIMIT 42')
+        cursor.execute('SELECT   id, windstotenMS, epoch FROM storm ORDER BY id DESC LIMIT 42')
+        print('Fetched last 42 wind burst rows - Storm table')
         return cursor.fetchall()
 
     def fetch_wind_speed(self):
         cursor = self.connection.cursor()
-        cursor.execute('SELECT id, windsnelheidMS FROM storm ORDER BY id DESC LIMIT 42')
+        cursor.execute('SELECT id, windsnelheidMS, epoch FROM storm ORDER BY id DESC LIMIT 42')
+        print('Fetched last 42 wind speed rows - Storm table')
         return cursor.fetchall()
 
     def fetch_current_direction(self):
         cursor = self.connection.cursor()
-        cursor.execute('SELECT windrichtingGR FROM storm ORDER BY id DESC')
+        cursor.execute('SELECT windrichtingGR, epoch FROM storm ORDER BY id DESC')
+        print('Fetched last direction row - Storm table')
         return cursor.fetchone()
+
+    def fetch_last_row(self):
+        cursor = self.connection.cursor()
+        cursor.execute('SELECT * FROM storm ORDER BY id DESC LIMIT 1')
+        print('Fetched last row - Storm table')
+        return cursor.fetchall()

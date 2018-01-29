@@ -26,6 +26,7 @@ class MainClass:
     key_tuple = ('windsnelheidMS', 'windrichtingGR', 'windstotenMS')  # Used in child class
 
     state = 'open'
+    current_state = None
     states = {}
 
     def __init__(self):
@@ -39,10 +40,10 @@ class MainClass:
         self.register_controllers()
 
         self.states = {
-            'open': OpenState(self, self.hardware, MainClass.storm).handle(),
-            'closed': ClosedState(self, self.hardware, MainClass.storm).handle(),
-            'opening': OpeningState(self, self.hardware).handle(),
-            'closing': ClosingState(self, self.hardware).handle()
+            'open': OpenState(self, self.hardware, MainClass.storm),
+            'closed': ClosedState(self, self.hardware, MainClass.storm),
+            'opening': OpeningState(self, self.hardware),
+            'closing': ClosingState(self, self.hardware)
         }
 
         flask_thread = threading.Thread(target=self.flask_app.run)
@@ -59,15 +60,25 @@ class MainClass:
 
     def state_change(self):
         while True:
-            self.state = self.states[self.state]
+            self.current_state = self.states[self.state]
+            print('Changed state')
+            self.state = self.current_state.handle()
+            print('Completed state handle')
 
     def data_save(self):
         while True:
+            print('Getting API data')
             api_data = RequestApi(self)
             MainClass.data_list = api_data.get_data()
-            storm_write = StormWrite(MainClass.data_list)
+            print('Saving API data in database')
+            storm_write = StormWrite(self.connection, MainClass.data_list)
             storm_write.storm_table_write()
             MainClass.storm = storm_write.storm_code()
+            print('Saved API data in database')
+            storm_repository = StormRepository(self.connection)
+            print('Check if data is saved')
+            fetch_epoch_storm = storm_repository.fetch_last_row()
+            print(fetch_epoch_storm, '- Storm table')
             time.sleep(600)
 
 
