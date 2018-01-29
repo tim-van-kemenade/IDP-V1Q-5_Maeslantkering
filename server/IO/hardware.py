@@ -1,4 +1,6 @@
 from gpiozero import Servo
+from gpiozero.pins import mock
+import platform
 
 
 class Hardware(object):
@@ -6,7 +8,10 @@ class Hardware(object):
     sensor_1 = 13
 
     def __init__(self):
-        self.servo = Servo(self.servo_pin)
+        self.servo = Servo(self.servo_pin, pin_factory=mock.MockFactory(pin_class=mock.MockPWMPin))
+
+        if platform.system() == 'Linux':
+            self.servo = Servo(self.servo_pin)
 
     def handle_input(self, input):
         # todo: find out how to do this @ gpiozero
