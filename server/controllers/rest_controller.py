@@ -12,34 +12,36 @@ class RestController(ControllerInterface):
 
     app = Flask(__name__)
 
+    def add_routes(self, app):
+        app.add_endpoint('/establish', 'establish', self.handle_establish_request)
+        app.add_endpoint('/alive', 'alive', self.handle_alive_request)
+        app.add_endpoint('/water', 'water', self.handle_water_request)
+        app.add_endpoint('/storm', 'storm', self.handle_storm_request)
+        app.add_endpoint('/dbfetch', 'dbfetch', self.handle_dbfetch_request)
 
-    @app.route('/alive')
-    def alive():
-        # Confirms connection
+
+    clients = []
+
+    def handle_establish_request(self):
+        self.clients.append(request.remote_addr)
+        return jsonify({
+            'connection established': True,
+            'timestamp': time
+        })
+
+    def handle_alive_request(self):
         return jsonify({
             'alive': True,
             'timestamp': time()
         })
 
-    @app.route('/water')
-    def water():
-        # Returns floatsensor data from dB
-        return jsonify({
-            'waterstand': 'test'
-        })
+    def handle_water_request(self):
+        return jsonify(self.water_repository.fetch_all())
 
-    check = ['sorry', 'sor1', 'sor2']
+    def handle_storm_request(self):
+        return jsonify(self.storm_repository.fetch_all())
 
-    @app.route('/dbfetch')
-    def dbfetch():
-        # Fetches API data from the weather dB
-        data = ['windsnelheidMS', 'windrichtingGR', 'windstotenMS']
-        json_encode = json.dumps(data)
-        return json_encode
-
-    @app.route('/storm', methods=['POST'])
-    def storm():
-        # recieves JSON file and turns it into a dict
+    def handle_dbfetch_request(self):
         if request.method == 'POST':
             storm_data = request.data.decode('utf-8')
             json_encode = json.loads(storm_data)
@@ -53,32 +55,3 @@ class RestController(ControllerInterface):
                 'status': 'succeed'
             })
 
-    if __name__ == '__main__':
-        app.run(debug=True, host='')
-
-    def add_routes(self, app):
-        app.add_endpoint('/alive', 'alive', self.handle_alive_request)
-        app.add_endpoint('/water', 'water', self.handle_water_request)
-        app.add_endpoint('/storm', 'storm', self.handle_storm_request)
-        app.add_endpoint('/establish', 'establish', self.handle_establish_request)
-
-    clients = []
-
-    def handle_establish_request(self):
-        self.clients.append(request.remote_addr)
-        return jsonify({
-            'connection established': True,
-            'timestamp': time
-        })
-
-    def handle_alive_request(self):
-        return jsonify({
-            "alive": True,
-            "timestamp": time()
-        })
-
-    def handle_water_request(self):
-        return jsonify(self.water_repository.fetch_all())
-
-    def handle_storm_request(self):
-        return jsonify(self.storm_repository.fetch_all())
