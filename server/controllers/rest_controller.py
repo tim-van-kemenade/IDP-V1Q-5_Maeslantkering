@@ -12,16 +12,6 @@ class RestController(ControllerInterface):
 
     app = Flask(__name__)
 
-    clients = []
-
-    @app.route('/establish')
-    def establish():
-        # Confirms connection with client and adds IP to clients list.
-        clients.append(request.remote_addr)
-        return jsonify({
-            'connection established': True,
-            'timestamp': time()
-        })
 
     @app.route('/alive')
     def alive():
@@ -70,6 +60,16 @@ class RestController(ControllerInterface):
         app.add_endpoint('/alive', 'alive', self.handle_alive_request)
         app.add_endpoint('/water', 'water', self.handle_water_request)
         app.add_endpoint('/storm', 'storm', self.handle_storm_request)
+        app.add_endpoint('/establish', 'establish', self.handle_establish_request)
+
+    clients = []
+
+    def handle_establish_request(self):
+        self.clients.append(request.remote_addr)
+        return jsonify({
+            'connection established': True,
+            'timestamp': time
+        })
 
     def handle_alive_request(self):
         return jsonify({
