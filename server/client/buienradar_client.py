@@ -13,23 +13,19 @@ class BuienRadarClient:
 
     data_keys = ('windsnelheidMS', 'windrichtingGR', 'windstotenMS')
 
-    def __init__(self):
-        #self.api_data = self.request_api()
-        print('Herro')
+    def get_data(self):
 
-    def request_api(self):
         api_url = 'https://api.buienradar.nl/data/public/1.1/jsonfeed'
         with request.urlopen(api_url) as url:
             data = json.loads(url.read().decode())
-        print('Request sent to API')
-        return data['buienradarnl']['weergegevens']['actueel_weer']['weerstations']
 
-    def get_data(self):
+        filtered_data = data['buienradarnl']['weergegevens']['actueel_weer']['weerstations']
+
         burst_list = []
         speed_list = []
         direction_list = []
         for station in self.station_number:
-            row = self.api_data['weerstation'][station[0]]
+            row = filtered_data['weerstation'][station[0]]
             value_list = []
             for key in self.data_keys:
                 value = row[key]
