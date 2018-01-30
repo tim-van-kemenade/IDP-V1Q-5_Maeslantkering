@@ -9,6 +9,12 @@ class StormWorker(AbstractWorker):
 
     def handle(self):
         print('Storm worker, lets make some decisions!  ')
+
+        current_state = self.state_machine.get_current_state()
+        if current_state == 'force-open' or current_state == 'force-closed':
+            print('forced!')
+            return
+
         score = self.get_sensor_score()
 
         if score > 0:

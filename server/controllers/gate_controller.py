@@ -10,6 +10,14 @@ class GateController(ControllerInterface):
         app.add_endpoint('/open-gate', 'open-gate', self.handle_open_gate_request)
         app.add_endpoint('/close-gate', 'close-gate', self.handle_close_gate_request)
         app.add_endpoint('/gate-status', 'gate-state', self.handle_gate_status_request)
+        app.add_endpoint('/reset-gate', 'reset-gate', self.handle_reset_gate_request)
+
+    def handle_reset_gate_request(self):
+        self.state_machine.apply_state('open')
+        return jsonify({
+            "success": True,
+            "message": "Gate is reset and open."
+        })
 
     def handle_gate_status_request(self):
         return jsonify({
@@ -17,14 +25,14 @@ class GateController(ControllerInterface):
         })
 
     def handle_close_gate_request(self):
-        self.state_machine.apply_state('closed')
+        self.state_machine.apply_state('force-closed')
         return jsonify({
             "success": True,
             "message": "Gate is closing."
         })
 
     def handle_open_gate_request(self):
-        self.state_machine.apply_state('open')
+        self.state_machine.apply_state('force-open')
         return jsonify({
             "success": True,
             "message": "Gate is opening."

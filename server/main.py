@@ -6,6 +6,8 @@ from server.controllers.gate_controller import GateController
 from server.IO.hardware import Hardware
 from server.states.open_state import OpenState
 from server.states.closed_state import ClosedState
+from server.states.force_closed_state import ForceClosedState
+from server.states.force_open_state import ForceOpenState
 from server.factory.database_factory import DatabaseFactory
 from server.repository.water_repository import WaterRepository
 from server.repository.storm_repository import StormRepository
@@ -34,6 +36,8 @@ class MainClass:
         self.state_machine = StateMachine({
             'open': OpenState(self.hardware),
             'closed': ClosedState(self.hardware),
+            'force-open': ForceOpenState(self.hardware),
+            'force-closed': ForceClosedState(self.hardware)
         })
 
         self.workers = [
