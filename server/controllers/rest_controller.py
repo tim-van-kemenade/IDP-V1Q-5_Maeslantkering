@@ -5,6 +5,7 @@ from server.controllers.controller_interface import ControllerInterface
 
 
 class RestController(ControllerInterface):
+    clients = []
 
     def __init__(self, water_repository, storm_repository):
         self.water_repository = water_repository
@@ -17,16 +18,13 @@ class RestController(ControllerInterface):
         app.add_endpoint('/alive', 'alive', self.handle_alive_request)
         app.add_endpoint('/water', 'water', self.handle_water_request)
         app.add_endpoint('/storm', 'storm', self.handle_storm_request)
-        app.add_endpoint('/dbfetch', 'dbfetch', self.handle_dbfetch_request)
-
-
-    clients = []
+        app.add_endpoint('/db-fetch', 'db-fetch', self.handle_dbfetch_request)
 
     def handle_establish_request(self):
         self.clients.append(request.remote_addr)
         return jsonify({
             'connection established': True,
-            'timestamp': time
+            'timestamp': time()
         })
 
     def handle_alive_request(self):
@@ -51,7 +49,6 @@ class RestController(ControllerInterface):
                 statuses = json_encode[status]
 
             return jsonify({
-                'datatransfer': statuses,
+                'data_transfer': statuses,
                 'status': 'succeed'
             })
-
