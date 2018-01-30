@@ -92,18 +92,18 @@ var graph_wind = Morris.Area({
 });
 // TODO: if water graph is not removed from the project, create function to set it's data like the function below does for wind_graph
 function LoadGraphData() {
-    // load json data to graphs
-    console.log("now updating data");
-    $.get("/wind_json", null,  // TODO: check if /wind_json is the path where the actual json is located
+    // Load json data to graphs
+    console.log("Now updating data");
+    $.get("192.168.42.1:1337/storm", null,  // TODO: check if url is the path where the actual json is located
         function (data, textstatus, jqXHR) {
-            console.log('callback returned result of type ' + typeof(data) );
-            console.log('text message: ' + textstatus);
+            console.log('Callback returned result of type ' + typeof(data) );
+            console.log('Text message: ' + textstatus);
             graph_wind.setData(data);
         })
 }
 
 $( document ).ready(function() {
-    console.log( "now starting periodic data retrieval" );
+    console.log( "Now starting periodic data retrieval" );
     LoadGraphData();  // Ensure graph is properly loaded right away
     self.setInterval(LoadGraphData, 600000); // TODO: adjust to 30 min or 1 hour if necessary
 });
