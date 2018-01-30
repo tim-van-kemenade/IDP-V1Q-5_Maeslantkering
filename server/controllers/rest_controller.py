@@ -37,7 +37,27 @@ class RestController(ControllerInterface):
         return jsonify(self.water_repository.fetch_all())
 
     def handle_storm_request(self):
-        return jsonify(self.storm_repository.fetch_all())
+        storm_fetch = self.storm_repository.fetch_all()
+        row_counter = 0
+        wind_speed_list = []
+        wind_burst_list = []
+        epoch_list = []
+        wind_graph_data = []
+        for row in storm_fetch:
+            row_counter += 1
+            wind_speed_list.append(row[1])
+            wind_burst_list.append(row[3])
+            epoch_list.append(row[4])
+            if row_counter == 6:
+                row_counter = 0
+                wind_speed = sum(wind_speed_list) / len(wind_speed_list)
+                wind_burst = sum(wind_burst_list) / len(wind_burst_list)
+                epoch = sum(epoch_list) / len(epoch_list)
+                wind_speed_list = []
+                wind_burst_list = []
+                epoch_list = []
+                wind_graph_data.append({'period': epoch, 'wind_speed': wind_speed, 'wind_burst': wind_burst})
+        return jsonify(wind_graph_data)
 
     def handle_dbfetch_request(self):
         if request.method == 'POST':

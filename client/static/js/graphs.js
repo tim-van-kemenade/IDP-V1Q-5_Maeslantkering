@@ -43,38 +43,38 @@ Morris.Area({
 var graph_wind = Morris.Area({
     element: 'morris-area-wind',
     data: [{
-            period: 'Past hour',
-            Wind_1: 0,
-            Wind_2: 0
+            period: 'No date',
+            wind_speed: 0,
+            wind_burst: 0
         }, {
-            period: '2 hours ago',
-            Wind_1: 0,
-            Wind_2: 0
+            period: 'No date',
+            wind_speed: 0,
+            wind_burst: 0
         }, {
-            period: '3 hours ago',
-            Wind_1: 0,
-            Wind_2: 0
+            period: 'No date',
+            wind_speed: 0,
+            wind_burst: 0
         }, {
-            period: '4 hours ago',
-            Wind_1: 0,
-            Wind_2: 0
+            period: 'No date',
+            wind_speed: 0,
+            wind_burst: 0
         }, {
-            period: '5 hours ago',
-            Wind_1: 0,
-            Wind_2: 0
+            period: 'No date',
+            wind_speed: 0,
+            wind_burst: 0
         }, {
-            period: '6 hours ago',
-            Wind_1: 0,
-            Wind_2: 0
+            period: 'No date',
+            wind_speed: 0,
+            wind_burst: 0
         },
         {
-            period: '7 hours ago',
-            Wind_1: 0,
-            Wind_2: 0
+            period: 'No date',
+            wind_speed: 0,
+            wind_burst: 0
         }
     ],
     xkey: 'period',
-    ykeys: ['Wind_1', 'Wind_2'],
+    ykeys: ['wind_speed', 'wind_burst'],
     labels: ['Burst', 'Speed'],
     pointSize: 0,
     fillOpacity: 0,

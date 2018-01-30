@@ -109,7 +109,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="white-box">
-                <img class="img-responsive" src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Maeslantkering_northern_half_2.jpg" alt="Maeslantkering">
+                <img class="img-responsive" src="{{ url_for('static', filename='images/maeslantkering_about_project.jpg') }}" alt="Maeslantkering">
               </div>
             </div>
           </div>
@@ -122,10 +122,14 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <div class="white-box">
-                <img class="img-rounded" src="http://www.headsuphobby.com/assets/images/b-595.jpg" alt="servo" style="padding-right: 100px">
-                <img class="img-rounded" src="https://ae01.alicdn.com/kf/HTB1KrQkIpXXXXXIaXXXq6xXFXXXY/Tank-Pool-Water-Level-Float-Switch-Right-Angle-Liquid-Level-Sensor-Liquid-Plastic-Float-Ball-Switcher.jpg" alt="servo">
+                <img class="img-rounded" src="{{ url_for('static', filename='images/servo.jpg') }}" alt="servo" style="padding-right: 100px">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="white-box">
+                <img class="img-rounded" src="{{ url_for('static', filename='images/float_sensor.jpg') }}" alt="servo">
               </div>
             </div>
           </div>
