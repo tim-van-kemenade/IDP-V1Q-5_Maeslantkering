@@ -41,7 +41,7 @@ class MainClass:
         })
 
         self.workers = [
-            APIWorker(self.buienradar_client),
+            APIWorker(self.buienradar_client, self.storm_repository),
             StormWorker(self.state_machine, self.hardware)
         ]
 

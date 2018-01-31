@@ -6,20 +6,16 @@ class APIWorker(AbstractWorker):
     def get_timeout(self) -> int:
         return 60
 
-    def __init__(self, buienradar_client):
+    def __init__(self, buienradar_client, storm_repository):
         self.client = buienradar_client
+        self.repository = storm_repository
 
     def handle(self):
         print('Getting API data')
         api_data = self.client.get_data()
-        #MainClass.data_list = api_data.get_data()
         print('Saving API data in database')
-        #storm_write = StormWrite(self.connection, MainClass.data_list)
-        #storm_write.storm_table_write()
-        #MainClass.storm = storm_write.storm_code()
+        self.repository.add_data(api_data[0], api_data[1], api_data[2])
         print('Saved API data in database')
-        #storm_repository = StormRepository(self.connection)
+        last_row = self.repository.fetch_last_row()
         print('Check if data is saved')
-        #fetch_epoch_storm = storm_repository.fetch_last_row()
-        #print(fetch_epoch_storm, '- Storm table')
-        #time.sleep(600)
+        print(last_row, '- Storm table')

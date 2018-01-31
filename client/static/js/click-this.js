@@ -35,5 +35,5 @@ function UpdateGateStatus() {
 $( document ).ready(function() {
     console.log( "Now starting periodic data retrieval" );
     UpdateGateStatus();  // Ensure graph is properly loaded right away
-    self.setInterval(LoadGraphData, 1000);
+    self.setInterval(UpdateGateStatus, 1000);
 });
