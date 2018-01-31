@@ -88,28 +88,36 @@ function LoadGraphData() {
             var json = data;
             console.log(json);
             var data_set = [];
-            for (var x = 1; x < 8; x++) {
-                var time = 0;
-                var speed = 0;
-                var burst = 0;
-                for (var i = 0; i < 6; i++) {
-                    time += json[i].epoch;
-                    speed += json[i].windsnelheidMS;
-                    burst += json[i].windstotenMS;
+            var time = 0;
+            var speed = 0;
+            var burst = 0;
+            var x = 0;
+            for (var i = 0; i < 42; i++) {
+                time += json[i].epoch;
+                speed += json[i].windsnelheidMS;
+                burst += json[i].windstotenMS;
+                x += 1;
+                if (x === 6) {
+                    x = 0;
+                    console.log(time);
+                    var dict = {};
+                    var date = new Date((time / 6)*1000);
+                    var hours = date.getHours();
+                    var minutes = date.getMinutes();
+                    var seconds = date.getSeconds();
+                    dict.period = hours + ':' + minutes + ':' + seconds;
+                    dict.wind_speed = speed / 6;
+                    dict.wind_burst = burst / 6;
+                    console.log('gonna print this dict');
+                    console.log(dict);
+                    console.log('printed dict');
+                    data_set.push(dict);
+                    console.log(data_set);
+                    graph_wind.setData(data_set);
+                    time = 0;
+                    speed = 0;
+                    burst = 0;
                 }
-                console.log(time);
-                var dict = {};
-                var date = new Date((time / 6) * 1000);
-                var hours = date.getHours();
-                var minutes = date.getMinutes();
-                var seconds = date.getSeconds();
-                dict.period = hours + ':' + minutes + ':' + seconds;
-                dict.wind_speed = speed / 6;
-                dict.wind_burst = burst / 6;
-                console.log('gonna print this dict');
-                console.log(dict);
-                console.log('printed dict');
-                data_set.push(dict)
             }
             console.log(data_set);
             graph_wind.setData(data_set);

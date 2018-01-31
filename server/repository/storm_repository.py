@@ -36,16 +36,10 @@ class StormRepository:
         print('Fetched all storm data - Storm table')
         return cursor.fetchall()
 
-    def fetch_wind_burst(self):
+    def fetch_graph_data(self):
         cursor = self.connection.cursor()
-        cursor.execute('SELECT   id, windstotenMS, epoch FROM storm ORDER BY id DESC LIMIT 42')
+        cursor.execute('SELECT   id, windsnelheidMS, windstotenMS, epoch FROM storm ORDER BY id DESC LIMIT 42')
         print('Fetched last 42 wind burst rows - Storm table')
-        return cursor.fetchall()
-
-    def fetch_wind_speed(self):
-        cursor = self.connection.cursor()
-        cursor.execute('SELECT id, windsnelheidMS, epoch FROM storm ORDER BY id DESC LIMIT 42')
-        print('Fetched last 42 wind speed rows - Storm table')
         return cursor.fetchall()
 
     def fetch_latest_wind_speed(self):

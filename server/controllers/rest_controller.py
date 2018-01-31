@@ -39,7 +39,7 @@ class RestController(ControllerInterface):
 
     def handle_storm_request(self):
         return jsonify(
-            self.storm_repository.fetch_all()
+            self.storm_repository.fetch_graph_data()
         )
 
     def handle_dbfetch_request(self):
