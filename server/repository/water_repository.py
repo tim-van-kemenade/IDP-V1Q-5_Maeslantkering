@@ -29,5 +29,4 @@ class WaterRepository:
     def fetch_all(self):
         cursor = self.connection.cursor()
         cursor.execute('SELECT * FROM water ORDER BY id DESC LIMIT 42')
-        print('Fetched last 42 water rows - Storm table')
         return cursor.fetchall()

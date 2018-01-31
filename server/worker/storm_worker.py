@@ -53,8 +53,8 @@ class StormWorker(AbstractWorker):
         lower_input = self.hardware.get_lower_float_sensor().value
         higher_input = self.hardware.get_higher_float_sensor().value
 
-        print('lower ', lower_input)
-        print('high ', higher_input)
+        print('low ', lower_input)
+        print('high', higher_input)
 
         if lower_input and higher_input:
             return 2

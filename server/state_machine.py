@@ -9,7 +9,6 @@ class StateMachine:
         if state_name not in self.states:
             raise Exception('The state' + state_name + ' does not exists!')
 
-        print('State changed to: ', state_name)
         self.states[state_name].handle()
         self.current_state = state_name
 

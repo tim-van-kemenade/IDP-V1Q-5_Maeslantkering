@@ -1,6 +1,5 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, json, make_response
 from time import time
-import json
 from server.controllers.controller_interface import ControllerInterface
 
 
@@ -34,10 +33,14 @@ class RestController(ControllerInterface):
         })
 
     def handle_water_request(self):
-        return jsonify(self.water_repository.fetch_all())
+        response = make_response(json.dumps(self.water_repository.fetch_all()))
+        response.headers['Content-Type'] = 'application/json'
+        return response
 
     def handle_storm_request(self):
-        return jsonify(self.storm_repository.fetch_all())
+        return jsonify(
+            self.storm_repository.fetch_all()
+        )
 
     def handle_dbfetch_request(self):
         if request.method == 'POST':
