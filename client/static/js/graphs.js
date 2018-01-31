@@ -90,11 +90,13 @@ var graph_wind = Morris.Area({
     resize: true
 
 });
+
+var base_url = 'http://127.0.0.1:1337';
 // TODO: if water graph is not removed from the project, create function to set it's data like the function below does for wind_graph
 function LoadGraphData() {
     // Load json data to graphs
     console.log("Now updating data");
-    $.get("192.168.42.1:1337/storm", null,  // TODO: check if url is the path where the actual json is located
+    $.get(base_url + "/storm", null,  // TODO: check if url is the path where the actual json is located
         function (data, textstatus, jqXHR) {
             console.log('Callback returned result of type ' + typeof(data) );
             console.log('Text message: ' + textstatus);
