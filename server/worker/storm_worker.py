@@ -3,29 +3,40 @@ from server.worker.abstract_worker import AbstractWorker
 
 class StormWorker(AbstractWorker):
 
-    def __init__(self, state_machine, hardware):
+    last_saved_sensor_score = 0
+
+    def __init__(self, state_machine, hardware, water_repository, storm_repository):
         self.state_machine = state_machine
         self.hardware = hardware
+        self.water_repository = water_repository
+        self.storm_repository = storm_repository
 
     def handle(self):
-        print('Storm worker, lets make some decisions!  ')
 
         current_state = self.state_machine.get_current_state()
         if current_state == 'force-open' or current_state == 'force-closed':
-            print('forced!')
             return
 
         score = self.get_sensor_score()
 
+        self.get_storm_code()
+
+        if self.last_saved_sensor_score != score:
+            self.water_repository.add_data(score)
+            self.last_saved_sensor_score = score
+
         if score > 0:
-            self.state_machine.apply_state('open')
-        else:
             self.state_machine.apply_state('closed')
+        else:
+            self.state_machine.apply_state('open')
 
     def get_timeout(self) -> int:
         return 1
 
-    def get_storm_code_by_score(self, score) -> str:
+    def get_storm_code(self) -> str:
+        data = self.storm_repository.fetch_latest_wind_speed()
+        score = data['windsnelheidMS']
+
         if score > 27.777778:
             return 'orange'
         elif score > 20.833333:

@@ -18,9 +18,6 @@ from server.worker.storm_worker import StormWorker
 
 
 class MainClass:
-    storm = None
-    data_list = [0, 0, 0]  # Used in child class
-
     state = 'open'
     current_state = None
 
@@ -42,7 +39,7 @@ class MainClass:
 
         self.workers = [
             APIWorker(self.buienradar_client),
-            StormWorker(self.state_machine, self.hardware)
+            StormWorker(self.state_machine, self.hardware, self.water_repository, self.storm_repository)
         ]
 
         self.register_controllers()

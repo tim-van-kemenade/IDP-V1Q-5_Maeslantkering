@@ -48,6 +48,12 @@ class StormRepository:
         print('Fetched last 42 wind speed rows - Storm table')
         return cursor.fetchall()
 
+    def fetch_latest_wind_speed(self):
+        cursor = self.connection.cursor()
+        cursor.execute('SELECT id, windsnelheidMS, epoch FROM storm ORDER BY id DESC LIMIT 0,1')
+
+        return cursor.fetchall()
+
     def fetch_current_direction(self):
         cursor = self.connection.cursor()
         cursor.execute('SELECT windrichtingGR, epoch FROM storm ORDER BY id DESC')
