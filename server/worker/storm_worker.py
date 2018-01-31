@@ -36,6 +36,10 @@ class StormWorker(AbstractWorker):
 
     def get_storm_code(self) -> str:
         data = self.storm_repository.fetch_latest_wind_speed()
+
+        if not data:
+            return 'none'
+
         score = data[0]['windsnelheidMS']
 
         if score > 27.777778:
@@ -48,6 +52,9 @@ class StormWorker(AbstractWorker):
     def get_sensor_score(self):
         lower_input = self.hardware.get_lower_float_sensor().value
         higher_input = self.hardware.get_higher_float_sensor().value
+
+        print('lower ', lower_input)
+        print('high ', higher_input)
 
         if lower_input and higher_input:
             return 2

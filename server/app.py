@@ -10,7 +10,7 @@ class App:
         CORS(self.app)
 
     def run(self):
-        self.app.run(port=1337)
+        self.app.run(port=1337, host='192.168.42.1')
 
     def register_controller(self, controller):
         controller.add_routes(self)
