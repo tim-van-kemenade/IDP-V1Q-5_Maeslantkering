@@ -8,4 +8,3 @@ class ForceOpenState(StateInterface):
     def handle(self):
         self.hardware.open_gate()
         self.hardware.red_off()
-        self.hardware.green_on()

@@ -44,7 +44,7 @@ $(document).ready(function () {
                 console.log('CLOSING!');
                 RequestServerAction(base_url + '/close-gate');
             },
-            'reset the gate': function() {
+            'show me the way': function () {
                 RequestServerAction(base_url + '/reset-gate')
             }
         };
@@ -52,4 +52,12 @@ $(document).ready(function () {
         annyang.addCommands(commands);
         annyang.start();
     }
+
+    cheet('↑ ↑ ↓ ↓ ← → ← →', function () {
+        var audio = new Audio('/static/sound/pass.mp3');
+        audio.addEventListener('ended', function() {
+            RequestServerAction(base_url + '/close-gate');
+        });
+        audio.play();
+    });
 });

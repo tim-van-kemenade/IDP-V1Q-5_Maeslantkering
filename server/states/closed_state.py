@@ -8,4 +8,3 @@ class ClosedState(StateInterface):
     def handle(self):
         self.hardware.close_gate()
         self.hardware.red_on()
-        self.hardware.green_off()
