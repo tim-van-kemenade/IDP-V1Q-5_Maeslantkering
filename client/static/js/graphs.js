@@ -1,72 +1,57 @@
-var data = [{
-        period: '2010',
-        Water_1: 0
-    }, {
-        period: '2011',
-        Water_1: 130
-    }, {
-        period: '2012',
-        Water_1: 80
-    }, {
-        period: '2013',
-        Water_1: 70
-    }, {
-        period: '2014',
-        Water_1: 180
-    }, {
-        period: '2015',
-        Water_1: 105
-    }, {
-        period: '2016',
-        Water_1: 250
-    }];
+var base_url = 'http://192.168.42.1:1337';  // TODO: change to server IP + port
 
-Morris.Area({
-    element: 'morris-area-water',
-    data: data,
-    xkey: 'period',
-    ykeys: ['Water_1'],
-    labels: ['Current height'],
-    pointSize: 0,
-    fillOpacity: 0.7,
-    pointStrokeColors: ['#2153ff'],
-    behaveLikeLine: true,
-    gridLineColor: '#e0e0e0',
-    lineWidth: 0,
-    smooth: false,
-    hideHover: 'auto',
-    lineColors: ['#2153ff'],
-    resize: true
+$.ajax({
+    url: base_url + '/water',
+    success: function (data) {
+        console.log(data);
+        Morris.Area({
+            element: 'morris-area-water',
+            data: data,
+            xkey: 'epoch',
+            ykeys: ['average_height'],
+            labels: ['Current height'],
+            pointSize: 0,
+            fillOpacity: 0.7,
+            pointStrokeColors: ['#2153ff'],
+            behaveLikeLine: true,
+            gridLineColor: '#e0e0e0',
+            lineWidth: 0,
+            smooth: false,
+            hideHover: 'auto',
+            lineColors: ['#2153ff'],
+            resize: true
 
+        });
+    }
 });
 
 var graph_wind = Morris.Area({
     element: 'morris-area-wind',
     data: [{
-            period: 'No date',
-            wind_speed: 0,
-            wind_burst: 0
-        }, {
-            period: 'No date',
-            wind_speed: 0,
-            wind_burst: 0
-        }, {
-            period: 'No date',
-            wind_speed: 0,
-            wind_burst: 0
-        }, {
-            period: 'No date',
-            wind_speed: 0,
-            wind_burst: 0
-        }, {
-            period: 'No date',
-            wind_speed: 0,
-            wind_burst: 0
-        }, {
-            period: 'No date',
-            wind_speed: 0,
-            wind_burst: 0
-        },
+        period: 'No date',
+        wind_speed: 0,
+        wind_burst: 0
+    }, {
+        period: 'No date',
+        wind_speed: 0,
+        wind_burst: 0
+    }, {
+        period: 'No date',
+        wind_speed: 0,
+        wind_burst: 0
+    }, {
+        period: 'No date',
+        wind_speed: 0,
+        wind_burst: 0
+    }, {
+        period: 'No date',
+        wind_speed: 0,
+        wind_burst: 0
+    }, {
+        period: 'No date',
+        wind_speed: 0,
+        wind_burst: 0
+    },
         {
             period: 'No date',
             wind_speed: 0,
@@ -91,7 +76,6 @@ var graph_wind = Morris.Area({
 
 });
 
-var base_url = 'http://127.0.0.1:1337';  // TODO: change to server IP + port
 // TODO: if water graph is not removed from the project, create function to set it's data like the function below does for wind_graph
 function LoadGraphData() {
     // Load json data to graphs
@@ -99,7 +83,7 @@ function LoadGraphData() {
     $.get(base_url + "/storm", null,  // TODO: check if url is the path where the actual json is located
         function (data, textstatus) {
             console.log(data);
-            console.log('Callback returned result of type ' + typeof(data) );
+            console.log('Callback returned result of type ' + typeof(data));
             console.log('Text message: ' + textstatus);
             var json = data;
             console.log(json);
@@ -115,7 +99,7 @@ function LoadGraphData() {
                 }
                 console.log(time);
                 var dict = {};
-                var date = new Date((time / 6)*1000);
+                var date = new Date((time / 6) * 1000);
                 var hours = date.getHours();
                 var minutes = date.getMinutes();
                 var seconds = date.getSeconds();
@@ -132,8 +116,8 @@ function LoadGraphData() {
         })
 }
 
-$( document ).ready(function() {
-    console.log( "Now starting periodic data retrieval" );
+$(document).ready(function () {
+    console.log("Now starting periodic data retrieval");
     LoadGraphData();  // Ensure graph is properly loaded right away
     self.setInterval(LoadGraphData, 600000); // TODO: adjust to 30 min or 1 hour if necessary
 });
