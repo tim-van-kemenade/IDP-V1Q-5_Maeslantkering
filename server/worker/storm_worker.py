@@ -18,24 +18,25 @@ class StormWorker(AbstractWorker):
             return
 
         score = self.get_sensor_score()
+        code = self.get_storm_code()
 
-        self.get_storm_code()
+        if score == 1 and code != 'none':
+            self.state_machine.apply_state('closed')
+        elif score == 2:
+            self.state_machine.apply_state('closed')
+        else:
+            self.state_machine.apply_state('open')
 
         if self.last_saved_sensor_score != score:
             self.water_repository.add_data(score)
             self.last_saved_sensor_score = score
-
-        if score > 0:
-            self.state_machine.apply_state('closed')
-        else:
-            self.state_machine.apply_state('open')
 
     def get_timeout(self) -> int:
         return 1
 
     def get_storm_code(self) -> str:
         data = self.storm_repository.fetch_latest_wind_speed()
-        score = data['windsnelheidMS']
+        score = data[0]['windsnelheidMS']
 
         if score > 27.777778:
             return 'orange'
