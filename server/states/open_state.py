@@ -8,9 +8,5 @@ class OpenState(StateInterface):
 
     def handle(self):
         self.hardware.open_gate()
-
-    def green(self):
-        self.hardware.green_on()
-
-    def red(self):
         self.hardware.red_off()
+        self.hardware.green_on()
