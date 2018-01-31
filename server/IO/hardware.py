@@ -1,4 +1,4 @@
-from gpiozero import Servo, MotionSensor, InputDevice, OutputDevice
+from gpiozero import Servo, OutputDevice
 from gpiozero.pins import mock
 import platform
 from gpiozero import LED
@@ -7,12 +7,14 @@ from gpiozero import LED
 class Hardware(object):
 
     servo_pin = 17
-    lower_float_pin = 27
+    lower_float_pin = 18
     higher_float_pin = 22
-    green = LED(2)
-    red = LED(3)
 
     def __init__(self):
+        self.red = LED(3)
+        self.lower_sensor = OutputDevice(self.lower_float_pin)
+        self.higher_sensor = OutputDevice(self.higher_float_pin)
+
         if platform.system() == 'Linux':
             self.servo = Servo(self.servo_pin)
         else:
@@ -22,25 +24,19 @@ class Hardware(object):
             )
 
     def get_lower_float_sensor(self):
-        return OutputDevice(self.lower_float_pin)
+        return self.lower_sensor
 
     def get_higher_float_sensor(self):
-        return OutputDevice(self.higher_float_pin)
+        return self.higher_sensor
 
     def open_gate(self):
-        self.servo.min()
-
-    def close_gate(self):
         self.servo.max()
 
-    def green_on(self, green):
-        return green.on()
+    def close_gate(self):
+        self.servo.min()
 
-    def red_on(self, red):
-        return red.on()
+    def red_on(self):
+        return self.red.on()
 
-    def green_off(self, green):
-        return green.off()
-
-    def red_off(self, red):
-        return red.off()
+    def red_off(self):
+        return self.red.off()
