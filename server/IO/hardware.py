@@ -8,7 +8,7 @@ class Hardware(object):
 
     servo_pin = 17
     lower_float_pin = 27
-    higher_float_pin = 15
+    higher_float_pin = 22
     green = LED(2)
     red = LED(3)
 
