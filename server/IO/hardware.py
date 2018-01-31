@@ -11,7 +11,6 @@ class Hardware(object):
     higher_float_pin = 22
 
     def __init__(self):
-        self.green = LED(2)
         self.red = LED(3)
         self.lower_sensor = OutputDevice(self.lower_float_pin)
         self.higher_sensor = OutputDevice(self.higher_float_pin)
@@ -36,14 +35,8 @@ class Hardware(object):
     def close_gate(self):
         self.servo.min()
 
-    def green_on(self):
-        return self.green.on()
-
     def red_on(self):
         return self.red.on()
-
-    def green_off(self):
-        return self.green.off()
 
     def red_off(self):
         return self.red.off()
