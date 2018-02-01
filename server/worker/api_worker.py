@@ -4,7 +4,7 @@ from server.worker.abstract_worker import AbstractWorker
 class APIWorker(AbstractWorker):
 
     def get_timeout(self) -> int:
-        return 60
+        return 600
 
     def __init__(self, buienradar_client, storm_repository):
         self.client = buienradar_client
