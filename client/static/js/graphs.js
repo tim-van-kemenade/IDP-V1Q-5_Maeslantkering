@@ -1,4 +1,4 @@
-var base_url = 'http://192.168.42.1:1337';  // TODO: change to server IP + port
+var base_url = 'http://192.168.42.1:1337';
 
 $.ajax({
     url: base_url + '/water',
@@ -75,12 +75,10 @@ var graph_wind = Morris.Area({
     resize: true
 
 });
-
-// TODO: if water graph is not removed from the project, create function to set it's data like the function below does for wind_graph
 function LoadGraphData() {
     // Load json data to graphs
     console.log("Now updating data");
-    $.get(base_url + "/storm", null,  // TODO: check if url is the path where the actual json is located
+    $.get(base_url + "/storm", null,
         function (data, textstatus) {
             console.log(data);
             console.log('Callback returned result of type ' + typeof(data));
@@ -127,5 +125,5 @@ function LoadGraphData() {
 $(document).ready(function () {
     console.log("Now starting periodic data retrieval");
     LoadGraphData();  // Ensure graph is properly loaded right away
-    self.setInterval(LoadGraphData, 600000); // TODO: adjust to 30 min or 1 hour if necessary
+    self.setInterval(LoadGraphData, 600000);
 });
