@@ -18,6 +18,7 @@ from server.worker.storm_worker import StormWorker
 
 
 class MainClass:
+    """Class in which functionality is initialized and run, it brings all separate modules together."""
     state = 'open'
     current_state = None
 
@@ -48,6 +49,7 @@ class MainClass:
         self.flask_app.run()
 
     def register_controllers(self):
+        """Register controllers in flask app."""
         self.flask_app.register_controller(
             RestController(self.water_repository, self.storm_repository)
         )
@@ -57,6 +59,7 @@ class MainClass:
         )
 
     def register_workers(self):
+        """Initialize workers in separate Threads."""
         for worker in self.workers:
             worker_thread = threading.Thread(target=worker.run)
             worker_thread.start()

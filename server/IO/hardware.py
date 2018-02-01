@@ -5,7 +5,7 @@ from gpiozero import LED
 
 
 class Hardware(object):
-
+    """Set-up hardware with gpiozero."""
     servo_pin = 17
     lower_float_pin = 18
     higher_float_pin = 22

@@ -1,5 +1,5 @@
-var base_url = 'http://192.168.42.1:1337';
-
+var base_url = 'http://192.168.42.1:1337';  // server url to send the command and request too
+// below function executes forced command on server
 function RequestServerAction(url) {
     $.get(url, function (data, textstatus, jqXHR) {
         console.log('callback returned result of type ' + typeof(data));
@@ -18,7 +18,7 @@ $('#close-gate').click(function () {
 $('#reset-gate').click(function () {
     RequestServerAction(base_url + '/reset-gate');
 });
-
+// below function updates gate status
 function UpdateGateStatus() {
     $.get(base_url + "/gate-status", null,
         function (data) {
@@ -28,10 +28,10 @@ function UpdateGateStatus() {
 
 $(document).ready(function () {
     console.log("Now starting periodic data retrieval");
-    UpdateGateStatus();  // Ensure graph is properly loaded right away
-    self.setInterval(UpdateGateStatus, 1000);
+    UpdateGateStatus();  // get gate status at page load
+    self.setInterval(UpdateGateStatus, 1000);  // update gate status every second
 
-
+    // try to use commands with speech
     if (annyang) {
         console.log('Listening!');
         // Let's define our first command. First the text we expect, and then the function it should call
@@ -52,7 +52,7 @@ $(document).ready(function () {
         annyang.addCommands(commands);
         annyang.start();
     }
-
+    // easter egg to close gate with arrows in the website (force-close with audio)
     cheet('↑ ↑ ↓ ↓ ← → ← →', function () {
         var audio = new Audio('/static/sound/pass.mp3');
         audio.addEventListener('ended', function() {

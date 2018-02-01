@@ -2,6 +2,7 @@ import time
 
 
 class WaterRepository:
+    """Class containing functions to execute queries on water database."""
     def __init__(self, connection):
         self.connection = connection
         self.create_table()

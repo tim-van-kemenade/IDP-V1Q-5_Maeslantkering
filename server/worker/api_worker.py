@@ -2,7 +2,7 @@ from server.worker.abstract_worker import AbstractWorker
 
 
 class APIWorker(AbstractWorker):
-
+    """Worker to get API data and save the data to the database."""
     def get_timeout(self) -> int:
         return 600
 

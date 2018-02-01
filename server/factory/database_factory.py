@@ -2,6 +2,7 @@ import sqlite3
 
 
 class DatabaseFactory:
+    """Create sqlite 3 database connection instance."""
     def __init__(self):
         pass
 
